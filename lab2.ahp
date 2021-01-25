@@ -1,0 +1,126 @@
+Version: 2.0
+Alternatives: &alternatives
+# Here, we list all the alternatives, together with their attributes. 
+# We can use these attributes later in the file when defining 
+# preferenceFunctions. The attributes can be quantitative or 
+# qualitative.
+  Smartfon_1:
+      Wyswietlacz: 5.4
+      Pamiec_RAM: 1
+      Pamiec_wbudowana: 128
+      Aparat_foto: 48
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 0
+      Cena: 449      
+  Smartfon_2:
+      Wyswietlacz: 6.4
+      Pamiec_RAM: 20
+      Pamiec_wbudowana: 128
+      Aparat_foto: 48
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 1
+      Cena: 849
+  Smartfon_3:
+      Wyswietlacz: 5.5
+      Pamiec_RAM: 6
+      Pamiec_wbudowana: 128
+      Aparat_foto: 16
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 0
+      Cena: 699
+  Smartfon_4:
+      Wyswietlacz: 6.59
+      Pamiec_RAM: 4
+      Pamiec_wbudowana: 64
+      Aparat_foto: 16
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 0
+      Cena: 779
+  Smartfon_5:
+      Wyswietlacz: 6.15
+      Pamiec_RAM: 4      
+      Pamiec_wbudowana: 64
+      Aparat_foto: 48
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 1
+      Cena: 999
+  Smartfon_6:
+      Wyswietlacz: 6.76
+      Pamiec_RAM: 8
+      Pamiec_wbudowana: 256
+      Aparat_foto: 50
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 1
+      Cena: 4949
+  Smartfon_7:
+      Wyswietlacz: 6.67
+      Pamiec_RAM: 4
+      Pamiec_wbudowana: 128
+      Aparat_foto: 48
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 0
+      Cena: 699
+  Smartfon_8:
+      Wyswietlacz: 6.5
+      Pamiec_RAM: 6
+      Pamiec_wbudowana: 128
+      Aparat_foto: 40
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 1
+      Cena: 2399
+  Smartfon_9:
+      Wyswietlacz: 6.39
+      Pamiec_RAM: 4
+      Pamiec_wbudowana: 64
+      Aparat_foto: 48
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 0
+      Cena: 599
+  Smartfon_10:
+      Wyswietlacz: 5.7
+      Pamiec_RAM: 3
+      Pamiec_wbudowana: 32
+      Aparat_foto: 13
+      Komunikacja_wi_fi: 1
+      Komunikacja_NFC: 0
+      Cena: 399
+#
+# End of Alternatives Section
+#####################################
+# Goal Section
+#
+Goal:
+# A Goal HAS preferences (within-level comparison) and HAS Children (items in level)
+  name: Choose the best smartfon
+  preferences:
+    pairwise:
+      - [wydajnosc, jakosc, 1]
+      - [wydajnosc, styl, 9]
+      - [wydajnosc, cena, 7]
+      - [jakosc, cena, 2]
+      - [styl, cena, 5]
+      - [jakosc, styl, 8]
+  children: 
+    wydajnosc:
+      preferences:
+        pairwiseFunction:
+          function(a2, a1) max(a1$Pamiec_RAM, a2$Pamiec_RAM)
+      children: *alternatives
+    jakosc:
+      preferences:
+        pairwiseFunction:
+          function(a2, a1) min(a1$Wyswietlacz, a2$Wyswietlacz)
+      children: *alternatives
+    styl:
+      preferences:
+        pairwiseFunction:
+          function(a2, a1) min(a1$Wyswietlacz, a2$Wyswietlacz)
+      children: *alternatives
+    cena:
+      preferences:
+        pairwiseFunction:
+          function(a2, a1) min(a1$Cena, a2$Cena)
+      children: *alternatives 
+#
+# End of Goal Section
+#####################################
